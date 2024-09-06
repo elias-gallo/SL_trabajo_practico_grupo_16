@@ -42,8 +42,8 @@ class MainActivity : AppCompatActivity() {
 
             }else{
 
-                val intentHome = Intent(this,HomeActivity::class.java)
-                startActivity(intentHome)
+                val intentList = Intent(this,ListadoPokemonActivity::class.java)
+                startActivity(intentList)
                 finish()
 
             }
