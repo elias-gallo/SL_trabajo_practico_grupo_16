@@ -1,6 +1,7 @@
 package com.example.trabajo_practico_grupo_16
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -24,6 +25,7 @@ class ListadoPokemonActivity : AppCompatActivity() {
 
         rvPokemon = findViewById(R.id.rvPokemon)
         pokemonAdapter = PokemonAdapter(getPokemon(), this)
+            { pokemon->mostrarDatosPokemon(pokemon) }
 
         rvPokemon.adapter = pokemonAdapter
     }
@@ -40,5 +42,9 @@ class ListadoPokemonActivity : AppCompatActivity() {
         pokemon.add(Pokemon(150, "Mewtwo", 20, 1220, 306))
 
         return pokemon;
+    }
+    private fun mostrarDatosPokemon(pokemon: Pokemon) {
+        val mensaje = "Tipo: ${pokemon.name}, Peso: ${pokemon.weight}, Altura: ${pokemon.height},id:${pokemon.id}"
+        Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
     }
 }

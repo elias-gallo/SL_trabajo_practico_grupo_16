@@ -5,14 +5,29 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListadoPokemonActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="16dp"
+    tools:context=".ListadoPokemonActivity">
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lista de Pokémon"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:padding="8dp"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPokemon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_pokemon"/>
-
+        tools:listitem="@layout/item_pokemon"
+        android:padding="10dp"
+        />
 </LinearLayout>

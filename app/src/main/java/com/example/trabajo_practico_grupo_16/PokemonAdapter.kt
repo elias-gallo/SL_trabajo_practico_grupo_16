@@ -7,16 +7,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class PokemonAdapter(var pokemons : MutableList<Pokemon>, var context : Context) : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() {
+class PokemonAdapter(
+    var pokemons: MutableList<Pokemon>,
+    var context: Context,
+    private val onItemClicked: (Pokemon) -> Unit // Añadir esta lambda para manejar el clic
+) : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() {
 
-    class PokemonViewHolder (view : View) : RecyclerView.ViewHolder(view){
-
-      lateinit var txtPokemon : TextView
-
-      init{
-          txtPokemon = view.findViewById(R.id.tv_name)
-      }
-
+    class PokemonViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val txtPokemon: TextView = view.findViewById(R.id.tv_name)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
@@ -33,6 +31,10 @@ class PokemonAdapter(var pokemons : MutableList<Pokemon>, var context : Context)
         val item = pokemons.get(position)
         holder.txtPokemon.text = item.name
 
+        holder.itemView.setOnClickListener {
+            onItemClicked(item) // Llama a la función que maneja el clic
+        }
 
     }
+
 }
