@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
@@ -18,6 +19,7 @@ class RegisterActivity : AppCompatActivity() {
     lateinit var etRepetirContraseña : EditText
     lateinit var btnVolver : Button
     lateinit var btnContinuar : Button
+    lateinit var toolbar : Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +37,10 @@ class RegisterActivity : AppCompatActivity() {
         etRepetirContraseña = findViewById(R.id.etRepetirContraseña)
         btnVolver = findViewById(R.id.btnVolver)
         btnContinuar = findViewById(R.id.btnContinuar)
+
+        toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.title = resources.getString(R.string.titulo)
 
         btnVolver.setOnClickListener {
 

@@ -3,10 +3,12 @@ package com.example.trabajo_practico_grupo_16
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
@@ -16,6 +18,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var etContraseña : EditText
     lateinit var btnIniciar : Button
     lateinit var btnRegistrar : Button
+    lateinit var cbRecordar : CheckBox
+    lateinit var toolbar : Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,24 +35,44 @@ class MainActivity : AppCompatActivity() {
         etContraseña = findViewById(R.id.etContraseña)
         btnIniciar = findViewById(R.id.btnIniciar)
         btnRegistrar = findViewById(R.id.btnRegistrar)
+        cbRecordar = findViewById(R.id.cbRecordar)
+
+        toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.title = resources.getString(R.string.tituloLogin)
+
+        var preferencias = getSharedPreferences(resources.getString(R.string.sp_credenciales), MODE_PRIVATE)
+        var usuarioGuardado = preferencias.getString(resources.getString(R.string.nombre_usuario), "")
+        var passwordGuardado = preferencias.getString(resources.getString(R.string.password_usuario), "")
+
+        if(usuarioGuardado!= "" && passwordGuardado != ""){
+            if (usuarioGuardado != null) {
+                startHomeActivity(usuarioGuardado)
+            }
+        }
 
         btnIniciar.setOnClickListener {
 
             var mensajeToast = "Iniciando Sesion"
+            var usuario = etUsuario.text.toString()
+            var pass = etContraseña.text.toString()
 
-            if(etUsuario.text.toString().isEmpty() || etContraseña.text.toString().isEmpty()){
+            if(usuario.isEmpty() || pass.isEmpty()){
 
-            mensajeToast = "Faltan datos, por favor complete todos los campos."
+                mensajeToast = "Completar Datos"
+                Toast.makeText(this, mensajeToast, Toast.LENGTH_SHORT).show()
 
             }else{
 
-                val intentList = Intent(this,ListadoPokemonActivity::class.java)
-                startActivity(intentList)
-                finish()
+                if(cbRecordar.isChecked){
+                    var preferencias = getSharedPreferences(resources.getString(R.string.sp_credenciales), MODE_PRIVATE)
+                    preferencias.edit().putString(resources.getString(R.string.nombre_usuario), usuario).apply()
+                    preferencias.edit().putString(resources.getString(R.string.password_usuario), pass).apply()
+                }
+
+               startHomeActivity(usuario)
 
             }
-
-            Toast.makeText(this, mensajeToast, Toast.LENGTH_SHORT).show()
 
         }
 
@@ -60,6 +84,15 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+
+    }
+
+    private fun startHomeActivity(usuario: String) {
+
+        val intentHome = Intent(this,HomeActivity::class.java)
+        intentHome.putExtra(resources.getString(R.string.nombre_usuario), usuario)
+        startActivity(intentHome)
+        finish()
 
     }
 }

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">trabajo_practico_grupo_16</string>
+    <string name="titulo">Pokémon</string>
+    <string name="item_listado">Listado de Pokemon</string>
+    <string name="tituloLogin">Login Pokemon</string>
+    <string name="tituloHome">Home</string>
+    <string name="nombre_usuario">NOMBRE</string>
+    <string name="password_usuario">PASSWORD</string>
+    <string name="sp_credenciales">SP_CREDENCIALES</string>
 </resources>
