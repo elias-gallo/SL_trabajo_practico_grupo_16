@@ -43,12 +43,11 @@ class ListadoPokemonActivity : AppCompatActivity() {
 
         var pokemon : MutableList<Pokemon> = ArrayList()
 
-        pokemon.add(Pokemon(1, "Bulbasaur", 7, 69, 64))
-        pokemon.add(Pokemon(4, "Charmander", 6, 85, 62))
-        pokemon.add(Pokemon(7, "Squirtle", 5, 90, 63))
-        pokemon.add(Pokemon(25, "Pikachu", 4, 60, 112))
-        pokemon.add(Pokemon(133, "Eevee", 3, 65, 65))
-        pokemon.add(Pokemon(150, "Mewtwo", 20, 1220, 306))
+        //si queres agregar un poke
+        //AppDataBase.getDataBase(applicationContext).pokemonDao().insert(Pokemon("Bulbasaur", 7, 69, 64))
+
+        val bdd = AppDataBase.getDataBase(applicationContext)
+        pokemon.addAll(bdd.pokemonDao().getAll())
 
         return pokemon;
     }

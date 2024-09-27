@@ -1,11 +1,17 @@
 package com.example.trabajo_practico_grupo_16
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "pokemon_entity")
 data class Pokemon(
 
-    var id : Int,
-    var name : String,
-    var height : Int,
-    var weight : Int,
-    var base_experience : Int
+    @ColumnInfo(name = "name") var name : String,
+    @ColumnInfo(name = "height") var height : Int,
+    @ColumnInfo(name = "weight")var weight : Int,
+    @ColumnInfo(name = "base_experience")var base_experience : Int
 
-)
+){
+    @PrimaryKey(autoGenerate = true) var id : Int = 0
+}
