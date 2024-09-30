@@ -1,5 +1,6 @@
 package com.example.trabajo_practico_grupo_16
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -31,12 +32,20 @@ class HomeActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar!!.title = resources.getString(R.string.tituloHome)
 
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.item_listado){
-            val intent = Intent(this, ListadoPokemonActivity::class.java)
-            startActivity(intent)
+        when (item.itemId) {
+            R.id.item_listado -> {
+                val intent = Intent(this, ListadoPokemonActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.item_salir -> {
+                cerrarSesion()
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -52,6 +61,19 @@ class HomeActivity : AppCompatActivity() {
             var usuario = bundle?.getString(resources.getString(R.string.nombre_usuario))
             Toast.makeText(this,"Bienvenido/a $usuario", Toast.LENGTH_LONG).show()
         }
+    }
+    private fun cerrarSesion() {
+        val sharedPreferences = getSharedPreferences("PreferenciasUsuario", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.clear() // Elimina todos los datos guardados
+        editor.apply()
+
+        Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show()
+
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
     }
 
 

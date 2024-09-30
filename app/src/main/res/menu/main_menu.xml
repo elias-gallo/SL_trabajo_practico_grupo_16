@@ -7,5 +7,10 @@
         android:title="@string/item_listado"
         app:showAsAction="never"
         />
+    <item
+        android:id="@+id/item_salir"
+        android:title="Cerrar sesion"
+        app:showAsAction="never"
+        />
 
 </menu>

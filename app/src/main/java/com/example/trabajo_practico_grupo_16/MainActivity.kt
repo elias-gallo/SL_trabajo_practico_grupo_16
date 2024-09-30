@@ -1,29 +1,32 @@
 package com.example.trabajo_practico_grupo_16
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var etUsuario : EditText
-    lateinit var etContraseña : EditText
-    lateinit var btnIniciar : Button
-    lateinit var btnRegistrar : Button
-    lateinit var cbRecordar : CheckBox
-    lateinit var toolbar : Toolbar
+    lateinit var etUsuario: EditText
+    lateinit var etContraseña: EditText
+    lateinit var btnIniciar: Button
+    lateinit var btnRegistrar: Button
+    lateinit var cbRecordar: CheckBox
+    lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -41,58 +44,57 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar!!.title = resources.getString(R.string.tituloLogin)
 
-        var preferencias = getSharedPreferences(resources.getString(R.string.sp_credenciales), MODE_PRIVATE)
-        var usuarioGuardado = preferencias.getString(resources.getString(R.string.nombre_usuario), "")
-        var passwordGuardado = preferencias.getString(resources.getString(R.string.password_usuario), "")
 
-        if(usuarioGuardado!= "" && passwordGuardado != ""){
-            if (usuarioGuardado != null) {
-                startHomeActivity(usuarioGuardado)
-            }
+
+
+
+        val usuarioGuardado = obtenerUsuarioRecordado(this)
+        if (usuarioGuardado != null) {
+            startHomeActivity(usuarioGuardado)
         }
 
         btnIniciar.setOnClickListener {
+            val usuario = etUsuario.text.toString()
+            val pass = etContraseña.text.toString()
 
-            var mensajeToast = "Iniciando Sesion"
-            var usuario = etUsuario.text.toString()
-            var pass = etContraseña.text.toString()
-
-            if(usuario.isEmpty() || pass.isEmpty()){
-
-                mensajeToast = "Completar Datos"
-                Toast.makeText(this, mensajeToast, Toast.LENGTH_SHORT).show()
-
-            }else{
-
-                if(cbRecordar.isChecked){
-                    var preferencias = getSharedPreferences(resources.getString(R.string.sp_credenciales), MODE_PRIVATE)
-                    preferencias.edit().putString(resources.getString(R.string.nombre_usuario), usuario).apply()
-                    preferencias.edit().putString(resources.getString(R.string.password_usuario), pass).apply()
-                }
-
-               startHomeActivity(usuario)
-
+            if (usuario.isEmpty() || pass.isEmpty()) {
+                Toast.makeText(this, "Completar Datos", Toast.LENGTH_SHORT).show()
+            } else {
+                iniciarSesion(usuario, pass)
             }
-
         }
 
         btnRegistrar.setOnClickListener {
-
             val intentRegister = Intent(this, RegisterActivity::class.java)
             startActivity(intentRegister)
             finish()
-
         }
+    }
 
-
+    private fun iniciarSesion(email: String, password: String) {
+        val usuarioDao = AppDataBase.getDataBase(this).usuarioDao()
+        GlobalScope.launch(Dispatchers.IO) {
+            val usuario = usuarioDao.obtenerUsuario(email, password)
+            withContext(Dispatchers.Main) {
+                if (usuario != null) {
+                    if (cbRecordar.isChecked) {
+                        guardarSesionUsuario(this@MainActivity, email)
+                    }
+                    startHomeActivity(email)
+                } else {
+                    Toast.makeText(this@MainActivity, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     private fun startHomeActivity(usuario: String) {
-
-        val intentHome = Intent(this,HomeActivity::class.java)
+        val intentHome = Intent(this, HomeActivity::class.java)
         intentHome.putExtra(resources.getString(R.string.nombre_usuario), usuario)
         startActivity(intentHome)
         finish()
-
     }
+
 }
+
+
