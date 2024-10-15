@@ -1,4 +1,4 @@
-package com.example.trabajo_practico_grupo_16
+package com.example.trabajo_practico_grupo_16.entities
 
 import android.content.Context
 import androidx.room.Entity

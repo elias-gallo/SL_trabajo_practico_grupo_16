@@ -1,4 +1,4 @@
-package com.example.trabajo_practico_grupo_16
+package com.example.trabajo_practico_grupo_16.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +11,10 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.trabajo_practico_grupo_16.database.AppDataBase
+import com.example.trabajo_practico_grupo_16.entities.PokemonEntity
+import com.example.trabajo_practico_grupo_16.adapters.PokemonAdapter
+import com.example.trabajo_practico_grupo_16.R
 
 class ListadoPokemonActivity : AppCompatActivity() {
 
@@ -39,9 +43,9 @@ class ListadoPokemonActivity : AppCompatActivity() {
         rvPokemon.adapter = pokemonAdapter
     }
 
-    private fun getPokemon(): MutableList<Pokemon> {
+    private fun getPokemon(): MutableList<PokemonEntity> {
 
-        var pokemon : MutableList<Pokemon> = ArrayList()
+        var pokemon : MutableList<PokemonEntity> = ArrayList()
 
         //si queres agregar un poke
         //AppDataBase.getDataBase(applicationContext).pokemonDao().insert(Pokemon("Bulbasaur", 7, 69, 64))
@@ -52,7 +56,7 @@ class ListadoPokemonActivity : AppCompatActivity() {
         return pokemon;
     }
 
-    private fun mostrarDatosPokemon(pokemon: Pokemon) {
+    private fun mostrarDatosPokemon(pokemon: PokemonEntity) {
         val mensaje = "Tipo: ${pokemon.name}, Peso: ${pokemon.weight}, Altura: ${pokemon.height},id:${pokemon.id}"
         Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
     }

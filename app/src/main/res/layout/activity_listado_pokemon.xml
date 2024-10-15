@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context=".ListadoPokemonActivity">
+    tools:context=".activities.ListadoPokemonActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -18,7 +18,7 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lista de Pokémon"
+        android:text="Mis Pokémon"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@color/black"

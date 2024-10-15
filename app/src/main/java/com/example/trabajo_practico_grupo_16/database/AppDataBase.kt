@@ -1,17 +1,15 @@
-package com.example.trabajo_practico_grupo_16
+package com.example.trabajo_practico_grupo_16.database
 
 import android.content.Context
-import androidx.room.Dao
 import androidx.room.Database
-import androidx.room.Entity
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.PrimaryKey
-import androidx.room.Query
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.trabajo_practico_grupo_16.dao.PokemonDao
+import com.example.trabajo_practico_grupo_16.dao.UsuarioDao
+import com.example.trabajo_practico_grupo_16.entities.PokemonEntity
+import com.example.trabajo_practico_grupo_16.entities.Usuario
 
-@Database(entities = [Pokemon::class, Usuario::class], version = 2)
+@Database(entities = [PokemonEntity::class, Usuario::class], version = 3)
 abstract class AppDataBase : RoomDatabase() {
 
     abstract fun pokemonDao() : PokemonDao

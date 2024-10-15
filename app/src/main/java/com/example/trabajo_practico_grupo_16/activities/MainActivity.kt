@@ -1,4 +1,4 @@
-package com.example.trabajo_practico_grupo_16
+package com.example.trabajo_practico_grupo_16.activities
 
 
 import android.content.Intent
@@ -11,6 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.trabajo_practico_grupo_16.database.AppDataBase
+import com.example.trabajo_practico_grupo_16.R
+import com.example.trabajo_practico_grupo_16.entities.guardarSesionUsuario
+import com.example.trabajo_practico_grupo_16.entities.obtenerUsuarioRecordado
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.Dispatchers
@@ -89,12 +93,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startHomeActivity(usuario: String) {
-        val intentHome = Intent(this, HomeActivity::class.java)
+        val intentHome = Intent(this, HomeActivity::class.java) //TestActivity cambiar a HomeActivity
         intentHome.putExtra(resources.getString(R.string.nombre_usuario), usuario)
         startActivity(intentHome)
         finish()
     }
 
 }
-
-

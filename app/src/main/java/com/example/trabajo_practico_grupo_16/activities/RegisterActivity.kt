@@ -1,4 +1,4 @@
-package com.example.trabajo_practico_grupo_16
+package com.example.trabajo_practico_grupo_16.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,10 +9,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.trabajo_practico_grupo_16.database.AppDataBase
+import com.example.trabajo_practico_grupo_16.R
+import com.example.trabajo_practico_grupo_16.entities.Usuario
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
 
 class RegisterActivity : AppCompatActivity() {
 

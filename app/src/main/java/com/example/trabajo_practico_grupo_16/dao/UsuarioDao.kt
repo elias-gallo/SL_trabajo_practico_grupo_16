@@ -1,9 +1,10 @@
-package com.example.trabajo_practico_grupo_16
+package com.example.trabajo_practico_grupo_16.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.trabajo_practico_grupo_16.entities.Usuario
 
 @Dao
 interface UsuarioDao {
