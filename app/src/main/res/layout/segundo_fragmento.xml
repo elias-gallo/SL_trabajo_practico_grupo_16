@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center">
+
+    <ImageButton
+        android:id="@+id/btnSeleccionarCancion1"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/rojoyfuego"
+        android:contentDescription="Botón para seleccionar canción 1"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        />
+
+    <ImageButton
+        android:id="@+id/btnSeleccionarCancion2"
+        android:layout_width="87dp"
+        android:layout_height="87dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:contentDescription="Botón para seleccionar canción 2"
+        android:cropToPadding="true"
+        android:paddingLeft="9dp"
+        android:paddingRight="9dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/esmeralda" />
+
+</LinearLayout>

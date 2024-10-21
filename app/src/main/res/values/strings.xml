@@ -9,4 +9,5 @@
     <string name="sp_credenciales">SP_CREDENCIALES</string>
     <string name="volver">Volver</string>
     <string name="tituloPokemonDetail">Pokémon</string>
+    <string name="desc_imagen_boton">imagen_button</string>
 </resources>

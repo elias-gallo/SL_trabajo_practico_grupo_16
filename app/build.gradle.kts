@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.trabajo_practico_grupo_16"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"

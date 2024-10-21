@@ -68,6 +68,16 @@ class HomeActivity : AppCompatActivity() {
 
         // Cargo los primeros Pokémon
         cargarMasPokemon()
+
+
+
+
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, PrimerFragmento())
+                .addToBackStack(null)
+                .commit()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

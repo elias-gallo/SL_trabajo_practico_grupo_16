@@ -6,15 +6,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
+
+
     <include
         android:id="@+id/toolbar"
         layout="@layout/primary_layout"
         />
 
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="400dp"
+        android:layout_height="84dp"
+        android:layout_gravity="top"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"></FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_pokemon_api"/>
+        tools:listitem="@layout/item_pokemon_api" />
+
+
 </LinearLayout>
